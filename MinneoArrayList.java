@@ -376,7 +376,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     }
 
     /**
-     * A new nested class inside of MinneoArrayList that functions as an Iterator for MinneoArrayList.
+     * A new nested class in MinneoArrayList that functions as an Iterator for MinneoArrayList.
      *
      * @author ryanm
      * @version 1.0

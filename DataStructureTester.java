@@ -1,5 +1,8 @@
 /**
  * The Tester for the Minneo Data Structures.
+ *
+ * @author ryanm
+ * @version 1.0
  */
 public class DataStructureTester
 {
@@ -19,9 +22,6 @@ public class DataStructureTester
 
         compareList.add("Ryan");
         compareList.add("Bro");
-
-
-
 
     }
 }
