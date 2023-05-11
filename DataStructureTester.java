@@ -14,14 +14,15 @@ public class DataStructureTester
     {
         MinneoArrayList<String> testArrayList = new MinneoArrayList<String>(3);
 
-        testArrayList.add("Minneo");
+        System.out.println(testArrayList.add("Minneo"));
         testArrayList.add("Ryan");
         testArrayList.add("Billy");
 
         MinneoArrayList<String> compareList = new MinneoArrayList<String>();
 
         compareList.add("Ryan");
-        compareList.add("Bro");
+        compareList.add("Oogao");
 
+        
     }
 }

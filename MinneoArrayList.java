@@ -110,9 +110,13 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
         return result;
     }
 
+    /**
+     * Clears all the elements from the MinneoArrayList by subtracting the size to 0.
+     * O(1)
+     */
     public void clear()
     {
-
+        size -= size;
     }
 
 
@@ -147,7 +151,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     }
 
     /**
-     * Tests to see whether every element in a collection is also in the MinneoArrayList.
+     * Tests to see whether every element in a collection is also in the MinneoArrayList. Will always return false if there are no elements in the MinneoArrayList. Will always return true if there are no elements in the collection.
      * O(N * M)
      * @param c collection to be checked for containment in this collection
      * @return true/false
@@ -156,6 +160,9 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     {
         boolean tmp = false;
 
+        if(c.size() == 0) return true;
+        if(size == 0) return false;
+
         for(Object collectionElement : c)
         {
             for(T dataElement : theData)
@@ -163,6 +170,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
                 if(collectionElement.equals(dataElement)) tmp = true;
             }
             if(tmp == false) return false;
+            tmp = false;
         }
         return true;
     }
@@ -197,7 +205,6 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     /**
      * Checks to see if the MinneoArrayList is empty or not. Will return true if it is empty.
      * O(1)
-     *
      * @return true/false
      */
     public boolean isEmpty()
@@ -221,6 +228,11 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
         size--;
     }
 
+    /**
+     * Removes an element in the MinneoArrayList by finding the first instance of that element.
+     * @param element element to be removed from this collection, if present
+     * @return true/false
+     */
     public boolean remove(Object element)
     {
         int i = indexOf((T) element);
@@ -233,7 +245,6 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     /**
      * Goes through all of theData and another collection, and removes the elements in theData that are also in the collection. Will return true once the method completes.
      * O(N * M)
-     *
      * @param c
      * @return true
      */
@@ -250,7 +261,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     }
 
     /**
-     * Retains all the common elements between the MinneoArrayList and the collection.
+     * Retains all the common elements between the MinneoArrayList and the collection. - Does not work atm.
      * O(N * M)
      * @param c collection containing elements to be retained in this collection
      * @return result
@@ -260,16 +271,14 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
         boolean result = false;
         boolean tmp = false;
 
-        for(T dataElement : theData)
+        for(Object collectionElement : c)
         {
-            for(Object collectionElement : c)
+            for(T dataElement : theData)
             {
-                if(dataElement.equals(collectionElement)) tmp = true;
+                if(this.contains(collectionElement)) tmp = true;
             }
-
             if(tmp == false)
             {
-                remove(indexOf(dataElement));
                 result = true;
             }
             tmp = false;
