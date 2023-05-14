@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Creating an ArrayList from the ground up in the form of MinneoArrayList. This class also implements the Collection and Iterable interfaces.
@@ -145,7 +146,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     {
         for(T element : theData)
         {
-            if (element.equals(inputtedElement)) return true;
+            if(element != null) if (element.equals(inputtedElement)) return true;
         }
         return false;
     }
@@ -261,30 +262,25 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
     }
 
     /**
-     * Retains all the common elements between the MinneoArrayList and the collection. - Does not work atm.
+     * Retains all the common elements between the MinneoArrayList and the collection. - I had to do some personal research to get this method to work. I attempted doing this without looking at the existing retainAll method. I failed to get it to work. I also had to change the "contains" method to make sure that the dataElement isn't null for this method to work properly.
      * O(N * M)
      * @param c collection containing elements to be retained in this collection
      * @return result
      */
     public boolean retainAll(Collection c)
     {
-        boolean result = false;
-        boolean tmp = false;
-
-        for(Object collectionElement : c)
+        Objects.requireNonNull(c);
+        boolean modified = false;
+        Iterator<T> it = iterator();
+        while(it.hasNext())
         {
-            for(T dataElement : theData)
+            if(!c.contains(it.next()))
             {
-                if(this.contains(collectionElement)) tmp = true;
+                it.remove();
+                modified = true;
             }
-            if(tmp == false)
-            {
-                result = true;
-            }
-            tmp = false;
         }
-
-        return result;
+        return modified;
     }
 
     /**
@@ -311,6 +307,7 @@ public class MinneoArrayList<T> implements Collection<T>, Iterable<T>
 
     /**
      * Copies the MinneoArrayList into an Array of objects and returns it.
+     * O(N)
      * @return arr
      */
     public Object[] toArray()
